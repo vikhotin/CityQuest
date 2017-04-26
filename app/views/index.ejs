@@ -1,6 +1,21 @@
 <% include header %>
+  <div id="mainblock">
 
-  <h1><%-title %></h1>
-  <p>Welcome to <%-title %></p>
+  <% if (state==='hello') { %>
+    <% include hello %>
+  <% } %>
+  <% if (state==='generate') { %>
+    <% include generate %>
+  <% } %>
+  <% if (state==='play') { %>
+    <% include play %>
+  <% } %> 
+  <% if (state==='feedback') { %>
+    <% include feedback %>
+  <% } %> 
+  <% if (state==='finish') { %>
+    <% include finish %>
+  <% } %>       
+  </div>
 
 <% include footer %>

@@ -1,0 +1,29 @@
+<form method="POST" id="quest_params">
+    <div class="city">
+    <label>Город</label>
+    <select>
+        <option>Москва</option>
+    </select>
+    </div>
+    <div class="type">
+    <label>Вид</label>
+        <div class="radio">
+        <input name="type" type="radio" value="Пешеходный" checked>
+        <label>Пешеходный</label>
+        <br>
+        <input name="type" type="radio" value="Автомобильный">
+        <label>Автомобильный</label>
+        </div>
+    </div>
+    <div class="time">
+    <label>Продолжительность</label>
+    <select>
+        <option>&lt;1 часа</option>
+        <option>1-2 часа</option>
+        <option>&gt;2 часов</option>
+    </select>    
+    </div>
+    <div class="button">
+      <input name="generate" type="submit" value="Начать квест">
+    </div>
+</form>

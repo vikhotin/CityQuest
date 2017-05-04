@@ -3,6 +3,7 @@ var express = require('express'),
   mongoose = require('mongoose'),
   //Place = mongoose.model('Place');
   placeManager = require('../models/puzzleManager.js')
+  feedbackManager = require('../models/feedbackManager.js')
 
 var state = 'hello';
 var current, amount;
@@ -88,7 +89,12 @@ router.post('/', function (req, res, next) {
       place: arr_places[i],
     });
   } else if (state == 'feedback'){
-      state = 'finish',
+      state = 'finish';
+      feedbackManager.addFeedback({
+        "route": arr_places,
+        "mark": req.body.mark,
+        "comment": req.body.recension,
+      });
       res.render('index', {
       state: state,
       title: 'Генератор городских квестов',

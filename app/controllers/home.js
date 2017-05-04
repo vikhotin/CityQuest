@@ -47,11 +47,24 @@ router.post('/', function (req, res, next) {
   } else if (state == 'generate') {
       state = 'play';
       i = 0;
-      n = 2; // TODO
+
+      index = req.body.time;
+      //index = req.body.getElementByName("time").selectedIndex;
+
+      if (index == "<1 часа"){
+        n = 3;
+      }
+      else if (index == "1-2 часа"){
+        n = 6;
+      }
+      else if (index == ">2 часов"){
+        n = 10;
+      }
 
       placeManager.getPlaces(function (places) {
         arr_places = places;
         shuffle(arr_places);
+        arr_places = arr_places.slice(0, n); // take n first
         res.render('index', {
         state: state,
         title: 'Генератор городских квестов',

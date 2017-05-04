@@ -13,6 +13,20 @@ module.exports = function (app) {
   app.use('/', router);
 };
 
+/**
+ * Shuffles array in place.
+ * @param {Array} a items The array containing the items.
+ */
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length; i; i--) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+    }
+}
+
 router.get('/', function (req, res, next) {
   //Place.find(function (err, places) {
     //if (err) return next(err);
@@ -33,10 +47,24 @@ router.post('/', function (req, res, next) {
   } else if (state == 'generate') {
       state = 'play';
       i = 0;
-      n = 2; // TODO
+
+      index = req.body.time;
+      //index = req.body.getElementByName("time").selectedIndex;
+
+      if (index == "<1 часа"){
+        n = 3;
+      }
+      else if (index == "1-2 часа"){
+        n = 6;
+      }
+      else if (index == ">2 часов"){
+        n = 10;
+      }
 
       placeManager.getPlaces(function (places) {
         arr_places = places;
+        shuffle(arr_places);
+        arr_places = arr_places.slice(0, n); // take n first
         res.render('index', {
         state: state,
         title: 'Генератор городских квестов',
